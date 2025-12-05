@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - <span id="companyName">B2B Travel Solutions</span></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --accent-color: #fbbc04;
+            --dark-color: #202124;
+            --light-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .btn-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Slider Belt */
+        .slider-belt {
+            background: var(--light-color);
+            padding: 2rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .slider-nav:hover {
+            background: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: 20px;
+        }
+
+        .slider-nav.next {
+            right: 20px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-item {
+            min-width: 300px;
+            height: 200px;
+            margin: 0 1rem;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .slider-item:hover {
+            transform: scale(1.05);
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: black;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .video-modal-content video {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+        }
+
+        .video-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: var(--primary-color);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+        }
+
+        .about-content {
+            background: linear-gradient(135deg, var(--light-color), white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .team-photo {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: var(--light-color);
+        }
+
+        /* Flipping Cards */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .flip-card-front {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flip-card-back.expanded {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(180deg);
+            width: 90%;
+            max-width: 1000px;
+            height: 80vh;
+            z-index: 9998;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .flip-card-front img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .service-description {
+            color: #6c757d;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .flip-card-back .service-title {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .flip-card-back .service-description {
+            color: rgba(255,255,255,0.9);
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .service-slider-belt {
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-slider-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .service-slider-item {
+            min-width: 100px;
+            height: 80px;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .expand-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .expand-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .close-expanded {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .close-expanded:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .service-content-grid {
+            display: flex;
+            gap: 1.5rem;
+            height: calc(100% - 60px);
+        }
+
+        .service-image-container {
+            flex: 0 0 40%;
+            position: relative;
+        }
+
+        .service-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .service-text-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            background: white;
+        }
+
+        .portfolio-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .portfolio-card:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--dark-color);
+            color: white;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: white;
+            padding: 0.75rem 1rem;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .slider-item {
+                min-width: 250px;
+                height: 150px;
+            }
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 25px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .music-btn {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            background: var(--secondary-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .music-icon {
+            font-size: 1rem;
+        }
+
+        /* Overlay for expanded cards */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9997;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            display: block;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-plane"></i> B2B Travel Solutions
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Crafting Exceptional B2B Travel Experiences</h1>
+            <p>Your Trusted Partner in Corporate Travel & Logistics</p>
+            <button class="btn btn-hero" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-phone"></i> Request a Quote
+            </button>
+        </div>
+    </section>
+
+    <!-- Slider Belt -->
+    <section class="slider-belt">
+        <div class="slider-container">
+            <button class="slider-nav prev" onclick="moveSlider('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav next" onclick="moveSlider('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="slider-track" id="sliderTrack">
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Luxury Travel">
+                </div>
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <video autoplay muted loop>
+                        <source src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Corporate Events">
+                </div>
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Business Travel">
+                </div>
+                <!-- Additional items for variety -->
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Luxury Travel">
+                </div>
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <video autoplay muted loop>
+                        <source src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Corporate Events">
+                </div>
+                <div class="slider-item" onclick="openMediaModal(this)">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Business Travel">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="close-modal" onclick="closeMediaModal()">&times;</button>
+            <div id="modalMediaContent"></div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h3>Leading B2B Travel Solutions</h3>
+                        <p>With over a decade of experience in corporate travel management, we specialize in creating seamless, luxurious, and efficient travel experiences for businesses worldwide.</p>
+                        
+                        <h4>Our Vision</h4>
+                        <p>To be the global leader in B2B travel solutions, setting new standards in corporate hospitality and logistics.</p>
+                        
+                        <h4>Our Mission</h4>
+                        <ul>
+                            <li>Deliver exceptional travel experiences that exceed expectations</li>
+                            <li>Provide 24/7 support for all corporate travel needs</li>
+                            <li>Maintain the highest standards of service and reliability</li>
+                            <li>Foster long-term partnerships with our clients</li>
+                        </ul>
+                        
+                        <div class="row text-center mt-4">
+                            <div class="col-md-4">
+                                <h3 class="text-primary">10+</h3>
+                                <p>Years Experience</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 class="text-primary">500+</h3>
+                                <p>Corporate Clients</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 class="text-primary">50+</h3>
+                                <p>Countries Served</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Our Team" class="team-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services-section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="MICE Services">
+                                <div class="service-icon">
+                                    <i class="fas fa-users-cog"></i>
+                                </div>
+                                <h3 class="service-title">MICE Services</h3>
+                                <p class="service-description">
+                                    Click to explore our comprehensive event management solutions
+                                </p>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="service-content-grid">
+                                    <div class="service-image-container">
+                                        <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="MICE Event">
+                                    </div>
+                                    <div class="service-text-container">
+                                        <h4 class="service-title">MICE Services</h4>
+                                        <p class="service-description">
+                                            Comprehensive Meetings, Incentives, Conferences, and Exhibitions management. From venue selection to full event coordination, we handle every detail with precision and professionalism.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-slider-belt">
+                                    <div class="service-slider-track">
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Event 1">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Event 2">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Event 3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="expand-btn" onclick="expandCard(this)">Expand</button>
+                                <button class="close-expanded" onclick="closeExpandedCard(this)" style="display: none;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Executive Retreats">
+                                <div class="service-icon">
+                                    <i class="fas fa-spa"></i>
+                                </div>
+                                <h3 class="service-title">Executive Retreats</h3>
+                                <p class="service-description">
+                                    Click to discover our luxury retreat experiences
+                                </p>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="service-content-grid">
+                                    <div class="service-image-container">
+                                        <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Retreat">
+                                    </div>
+                                    <div class="service-text-container">
+                                        <h4 class="service-title">Executive Retreats</h4>
+                                        <p class="service-description">
+                                            Customized corporate retreats and team-building experiences in exclusive destinations, designed to inspire and rejuvenate your leadership team while fostering collaboration.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-slider-belt">
+                                    <div class="service-slider-track">
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Retreat 1">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Retreat 2">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Retreat 3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="expand-btn" onclick="expandCard(this)">Expand</button>
+                                <button class="close-expanded" onclick="closeExpandedCard(this)" style="display: none;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Travel Logistics">
+                                <div class="service-icon">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <h3 class="service-title">Travel Logistics</h3>
+                                <p class="service-description">
+                                    Click to explore our comprehensive logistics solutions
+                                </p>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="service-content-grid">
+                                    <div class="service-image-container">
+                                        <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Logistics">
+                                    </div>
+                                    <div class="service-text-container">
+                                        <h4 class="service-title">Travel Logistics</h4>
+                                        <p class="service-description">
+                                            24/7 travel support, ground transportation, visa assistance, and comprehensive logistics management for seamless corporate travel experiences worldwide.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-slider-belt">
+                                    <div class="service-slider-track">
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Logistics 1">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Logistics 2">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Logistics 3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="expand-btn" onclick="expandCard(this)">Expand</button>
+                                <button class="close-expanded" onclick="closeExpandedCard(this)" style="display: none;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Service Cards -->
+                <div class="col-lg-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_real_realistic_photography_for.jpeg" alt="VIP Services">
+                                <div class="service-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <h3 class="service-title">VIP Services</h3>
+                                <p class="service-description">
+                                    Click to discover our exclusive VIP treatment
+                                </p>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="service-content-grid">
+                                    <div class="service-image-container">
+                                        <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="VIP">
+                                    </div>
+                                    <div class="service-text-container">
+                                        <h4 class="service-title">VIP Services</h4>
+                                        <p class="service-description">
+                                            Exclusive VIP treatment with private jets, luxury accommodations, personal concierge services, and premium experiences tailored for high-profile corporate executives and dignitaries.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-slider-belt">
+                                    <div class="service-slider-track">
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="VIP 1">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="VIP 2">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="VIP 3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="expand-btn" onclick="expandCard(this)">Expand</button>
+                                <button class="close-expanded" onclick="closeExpandedCard(this)" style="display: none;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Corporate Events">
+                                <div class="service-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h3 class="service-title">Corporate Events</h3>
+                                <p class="service-description">
+                                    Click to explore our event management expertise
+                                </p>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="service-content-grid">
+                                    <div class="service-image-container">
+                                        <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Events">
+                                    </div>
+                                    <div class="service-text-container">
+                                        <h4 class="service-title">Corporate Events</h4>
+                                        <p class="service-description">
+                                            Complete corporate event management from concept to execution, including product launches, annual meetings, team building events, and corporate celebrations with full logistical support.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-slider-belt">
+                                    <div class="service-slider-track">
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Events 1">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Events 2">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Events 3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="expand-btn" onclick="expandCard(this)">Expand</button>
+                                <button class="close-expanded" onclick="closeExpandedCard(this)" style="display: none;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Global Consulting">
+                                <div class="service-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h3 class="service-title">Global Consulting</h3>
+                                <p class="service-description">
+                                    Click to learn about our worldwide expertise
+                                </p>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="service-content-grid">
+                                    <div class="service-image-container">
+                                        <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Consulting">
+                                    </div>
+                                    <div class="service-text-container">
+                                        <h4 class="service-title">Global Consulting</h4>
+                                        <p class="service-description">
+                                            Strategic travel consulting services with deep local knowledge, regulatory compliance expertise, cultural insights, and comprehensive risk management for international corporate travel programs.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-slider-belt">
+                                    <div class="service-slider-track">
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(2).jpeg" alt="Consulting 1">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for.jpeg" alt="Consulting 2">
+                                        </div>
+                                        <div class="service-slider-item">
+                                            <img src="https://ik.imagekit.io/244zlaxy8/a_stunning_supper_hyper_realistic_photography_for%20(1).jpeg" alt="Consulting 3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="expand-btn" onclick="expandCard(this)">Expand</button>
+                                <button class="close-expanded" onclick="closeExpandedCard(this)" style="display: none;">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio-section">
+        <div class="container">
+            <h2 class="section-title">Success Stories</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="portfolio-card">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4 class="portfolio-title">Tech Launch in Dubai</h4>
+                        <p>Managed travel for 500 attendees, full VIP logistics, and luxury accommodations for a major technology company launch event.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="portfolio-card">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-palm-tree"></i>
+                        </div>
+                        <h4 class="portfolio-title">Incentive Trip to Maldives</h4>
+                        <p>Organized an exclusive incentive trip for 200 top performers with private island experiences and luxury amenities.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="portfolio-card">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-globe-europe"></i>
+                        </div>
+                        <h4 class="portfolio-title">European Industry Conference</h4>
+                        <p>Coordinated multi-city conference tour across 5 European capitals with seamless logistics and cultural experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <h4>Request a Quote</h4>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email Address" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Company Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Direct Contact</h4>
+                    <div class="mb-4">
+                        <p><i class="fas fa-phone"></i> B2B Hotline: +1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> Email: corporate@b2btravelsolutions.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: 123 Business Ave, Corporate City, CC 12345</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Business Hours</h5>
+                        <p>Monday - Friday: 8:00 AM - 8:00 PM</p>
+                        <p>Saturday: 9:00 AM - 6:00 PM</p>
+                        <p>Sunday: Emergency Support Only</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--dark-color); color: white; text-align: center; padding: 2rem;">
+        <div class="container">
+            <p>&copy; 2024 B2B Travel Solutions. All rights reserved. | Personalized for <span id="footerCompany">Your Company</span></p>
+        </div>
+    </footer>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="music-btn" id="playMusic" onclick="toggleMusic()">
+            <i class="fas fa-play music-icon"></i>
+        </button>
+        <button class="music-btn" id="stopMusic" onclick="stopMusic()" style="display: none;">
+            <i class="fas fa-stop music-icon"></i>
+        </button>
+        <audio id="backgroundMusic" loop>
+            <source src="https://ik.imagekit.io/weo7pcw8v/Sound%20track.m4a" type="audio/m4a">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Overlay for expanded cards -->
+    <div class="overlay" id="overlay" onclick="closeAllExpandedCards()"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Slider functionality
+        let currentSlide = 0;
+        const sliderTrack = document.getElementById('sliderTrack');
+        const sliderItems = document.querySelectorAll('.slider-item');
+        const totalSlides = sliderItems.length;
+
+        function moveSlider(direction) {
+            if (direction === 'next') {
+                currentSlide = (currentSlide + 1) % totalSlides;
+            } else {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            }
+            
+            const offset = -currentSlide * (300 + 16); // 300px width + 16px margin
+            sliderTrack.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Auto-play slider
+        setInterval(() => {
+            moveSlider('next');
+        }, 5000);
+
+        // Media modal functionality
+        function openMediaModal(element) {
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('modalMediaContent');
+            
+            // Clone the media element
+            const mediaClone = element.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(mediaClone);
+            
+            // Remove onclick from clone
+            mediaClone.onclick = null;
+            
+            // Show modal
+            modal.classList.add('active');
+            
+            // If it's a video, play it
+            const video = mediaClone.querySelector('video');
+            if (video) {
+                video.muted = false;
+                video.play();
+            }
+        }
+
+        function closeMediaModal() {
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('modalMediaContent');
+            
+            // Stop any playing videos
+            const videos = modalContent.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+            
+            modal.classList.remove('active');
+            modalContent.innerHTML = '';
+        }
+
+        // Music player functionality
+        let isPlaying = false;
+        const audio = document.getElementById('backgroundMusic');
+        const playBtn = document.getElementById('playMusic');
+        const stopBtn = document.getElementById('stopMusic');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play music-icon"></i>';
+                playBtn.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    playBtn.innerHTML = '<i class="fas fa-pause music-icon"></i>';
+                    playBtn.classList.add('playing');
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log('Audio play failed:', error);
+                });
+            }
+        }
+
+        function stopMusic() {
+            audio.pause();
+            audio.currentTime = 0;
+            playBtn.innerHTML = '<i class="fas fa-play music-icon"></i>';
+            playBtn.classList.remove('playing');
+            isPlaying = false;
+        }
+
+        // Expanded card functionality
+        function expandCard(button) {
+            const cardBack = button.parentElement;
+            const overlay = document.getElementById('overlay');
+            
+            cardBack.classList.add('expanded');
+            overlay.classList.add('active');
+            
+            button.style.display = 'none';
+            cardBack.querySelector('.close-expanded').style.display = 'block';
+            
+            // Disable scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeExpandedCard(button) {
+            const cardBack = button.parentElement;
+            const overlay = document.getElementById('overlay');
+            
+            cardBack.classList.remove('expanded');
+            overlay.classList.remove('active');
+            
+            button.style.display = 'none';
+            cardBack.querySelector('.expand-btn').style.display = 'block';
+            
+            // Enable scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeAllExpandedCards() {
+            const expandedCards = document.querySelectorAll('.flip-card-back.expanded');
+            expandedCards.forEach(card => {
+                card.classList.remove('expanded');
+                card.querySelector('.close-expanded').style.display = 'none';
+                card.querySelector('.expand-btn').style.display = 'block';
+            });
+            
+            const overlay = document.getElementById('overlay');
+            overlay.classList.remove('active');
+            
+            // Enable scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        // Get company name from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const companyName = urlParams.get('company') || 'Your Company';
+        
+        // Update company name in header and footer
+        document.getElementById('companyName').textContent = companyName;
+        document.getElementById('footerCompany').textContent = companyName;
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you within 24 hours.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

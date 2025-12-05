@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation - <span id="companyNameDisplay">B2B Travel Solutions</span></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --accent-color: #fbbc04;
+            --dark-color: #202124;
+            --light-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Section */
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .quote-date {
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        /* Light Strip Section */
+        .light-strip {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem 0;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .prepared-for {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .prepared-for strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .quotation-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-header-custom {
+            background: linear-gradient(135deg, var(--accent-color), #fd7e14);
+            color: white;
+            padding: 1.5rem 2rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .card-body-custom {
+            padding: 2rem;
+        }
+
+        /* Trip Details Table */
+        .trip-table {
+            background: var(--light-color);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .trip-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .trip-table th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .trip-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .trip-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .trip-name {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .trip-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .trip-price {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        /* Additional Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .service-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* B2B Policy */
+        .policy-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .policy-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-item h5 {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-item p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* Total Summary */
+        .total-summary {
+            background: linear-gradient(135deg, var(--secondary-color), #28a745);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .total-summary h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .total-breakdown {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .total-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .total-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Acceptance Section */
+        .acceptance-section {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        /* Enhanced Request Changes Modal */
+        .feedback-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .feedback-modal.active {
+            display: flex;
+        }
+
+        .feedback-form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .feedback-modal.active .feedback-form-container {
+            transform: scale(1);
+        }
+
+        .feedback-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .feedback-header h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feedback-header p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .feedback-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-submit-feedback {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit-feedback:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-cancel-feedback {
+            background: #6c757d;
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel-feedback:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Success Animation */
+        .feedback-success {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feedback-success.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .success-message {
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-submessage {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .close-feedback {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-feedback:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-accept {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-accept:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-decline {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            border: none;
+            border-radius: 25px;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn-decline:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(220, 53, 69, 0.3);
+        }
+
+        /* Validity Notice */
+        .validity-notice {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .trip-table {
+                font-size: 0.9rem;
+            }
+            
+            .total-amount {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation for quote loading */
+        .quote-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .quote-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(26, 115, 232, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Print styles */
+        @media print {
+            .acceptance-section, .btn-accept, .btn-decline {
+                display: none;
+            }
+            
+            .quotation-card {
+                box-shadow: none;
+                border: 2px solid #dee2e6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="header-section">
+        <div class="container">
+            <div class="header-content">
+                <h1>Quotation for <span id="companyNameDisplay">Your Company</span></h1>
+                <div class="quote-date">
+                    <i class="fas fa-calendar-alt"></i> Quote Date: <span id="quoteDate"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Trip Details -->
+            <div class="quotation-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-route"></i> Trip Details
+                </div>
+                <div class="card-body-custom">
+                    <div class="trip-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Trip Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tripDetailsBody">
+                                <!-- Trip details will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="quotation-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-plus-circle"></i> Additional Services Available
+                </div>
+                <div class="card-body-custom">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <i class="fas fa-car"></i>
+                            <h6>Premium Transport</h6>
+                            <p>Luxury vehicle upgrades</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-utensils"></i>
+                            <h6>Extra Meals</h6>
+                            <p>Additional dining options</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-wifi"></i>
+                            <h6>Premium WiFi</h6>
+                            <p>High-speed connectivity</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-concierge-bell"></i>
+                            <h6>Concierge Service</h6>
+                            <p>24/7 personal assistance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B2B Policy -->
+            <div class="quotation-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-file-contract"></i> B2B Policy & Terms
+                </div>
+                <div class="card-body-custom">
+                    <div class="policy-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="policy-item">
+                                    <h5><i class="fas fa-calendar-times"></i> Cancellation Policy</h5>
+                                    <p>Cancellations made 30+ days prior: Full refund<br>
+                                       Cancellations made 15-29 days prior: 50% refund<br>
+                                       Cancellations made less than 15 days: No refund</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="policy-item">
+                                    <h5><i class="fas fa-credit-card"></i> Payment Terms</h5>
+                                    <p>50% down payment required upon booking<br>
+                                       Remaining balance due 14 days before travel<br>
+                                       Accepted payment methods: Wire transfer, corporate credit card</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="validity-notice">
+                            <i class="fas fa-clock"></i> This quotation is valid for 30 days from the quote date.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Summary -->
+            <div class="quotation-card">
+                <div class="card-header-custom">
+                    <i class="fas fa-calculator"></i> Quote Summary
+                </div>
+                <div class="card-body-custom">
+                    <div class="total-summary">
+                        <div class="total-breakdown">
+                            <span class="total-label">Subtotal:</span>
+                            <span id="subtotalDisplay">$0.00</span>
+                        </div>
+                        <div class="total-breakdown">
+                            <span class="total-label">Taxes & Fees:</span>
+                            <span id="taxesDisplay">$0.00</span>
+                        </div>
+                        <hr style="border-color: rgba(255,255,255,0.3);">
+                        <div class="total-breakdown">
+                            <span class="total-label">Final Total:</span>
+                            <span class="total-amount" id="finalTotalDisplay">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acceptance Section -->
+            <div class="acceptance-section">
+                <h4>Ready to Proceed?</h4>
+                <p>Click "Accept Quote" to confirm your booking, or "Request Changes" if you need modifications.</p>
+                <button class="btn btn-accept" id="acceptQuote">
+                    <i class="fas fa-check"></i> Accept Quote
+                </button>
+                <button class="btn btn-decline" id="requestChanges">
+                    <i class="fas fa-edit"></i> Request Changes
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--dark-color); color: white; text-align: center; padding: 2rem;">
+        <div class="container">
+            <p>&copy; 2024 B2B Travel Solutions. All rights reserved.</p>
+            <p>Quotation prepared for <strong id="footerCompanyDisplay">Your Company</strong></p>
+        </div>
+    </footer>
+
+    <!-- Request Changes Modal -->
+    <div id="feedbackModal" class="feedback-modal">
+        <div class="feedback-form-container">
+            <button type="button" class="close-feedback" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div id="feedbackFormContainer">
+                <div class="feedback-header">
+                    <h4>Request Changes</h4>
+                    <p>Please provide your details and describe the changes you'd like to make.</p>
+                </div>
+                
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="feedbackName">Name <span class="required">*</span></label>
+                        <input type="text" id="feedbackName" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="feedbackEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackPhone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="feedbackPhone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedbackTextarea">Changes Required <span class="required">*</span></label>
+                        <textarea id="feedbackTextarea" name="message" placeholder="Please describe the changes you'd like to make to this quotation..." required></textarea>
+                    </div>
+                    
+                    <div class="feedback-actions">
+                        <button type="submit" class="btn btn-submit-feedback">
+                            <i class="fas fa-paper-plane"></i> Submit Request
+                        </button>
+                        <button type="button" class="btn btn-cancel-feedback">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="feedbackSuccess" class="feedback-success">
+                <div class="success-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="success-message">
+                    Thank you for your feedback
+                </div>
+                <div class="success-submessage">
+                    One of our concern team will be in touch within 1 business day
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Get quote data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const companyName = urlParams.get('company') || 'Your Company';
+        const quoteId = urlParams.get('quote') || 'default';
+
+        // Set company name displays
+        document.getElementById('companyNameDisplay').textContent = companyName;
+        document.getElementById('footerCompanyDisplay').textContent = companyName;
+
+        // Set current date
+        const today = new Date();
+        const formattedDate = today.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        document.getElementById('quoteDate').textContent = formattedDate;
+
+        // Load quote data from API
+        async function loadQuoteData() {
+            try {
+                const response = await fetch(`/tables/quotations/${quoteId}`);
+                if (!response.ok) {
+                    throw new Error('Quote not found');
+                }
+                const quoteData = await response.json();
+                populateQuoteData(quoteData);
+            } catch (error) {
+                console.error('Error loading quote:', error);
+                // Fallback to sample data
+                populateQuoteData(getSampleQuoteData());
+            }
+        }
+
+        // Sample quote data for demonstration
+        function getSampleQuoteData() {
+            return {
+                target_company: companyName,
+                trips: [
+                    {
+                        name: "Dubai Business Summit",
+                        description: "5-day corporate event with luxury accommodations",
+                        price: 12500
+                    },
+                    {
+                        name: "Singapore Tech Conference",
+                        description: "3-day technology conference with networking events",
+                        price: 8900
+                    },
+                    {
+                        name: "London Executive Retreat",
+                        description: "Week-long executive retreat with team building activities",
+                        price: 15600
+                    }
+                ],
+                subtotal: 37000,
+                final_total: 40700
+            };
+        }
+
+        // Populate quote data
+        function populateQuoteData(quoteData) {
+            // Populate trip details
+            const tripBody = document.getElementById('tripDetailsBody');
+            tripBody.innerHTML = '';
+            
+            quoteData.trips.forEach(trip => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="trip-name">${trip.name}</div>
+                    </td>
+                    <td>
+                        <div class="trip-description">${trip.description}</div>
+                    </td>
+                    <td>
+                        <div class="trip-price">$${trip.price.toLocaleString()}</div>
+                    </td>
+                `;
+                tripBody.appendChild(row);
+            });
+
+            // Update totals
+            const taxes = quoteData.final_total - quoteData.subtotal;
+            document.getElementById('subtotalDisplay').textContent = `$${quoteData.subtotal.toLocaleString()}`;
+            document.getElementById('taxesDisplay').textContent = `$${taxes.toLocaleString()}`;
+            document.getElementById('finalTotalDisplay').textContent = `$${quoteData.final_total.toLocaleString()}`;
+        }
+
+        // Handle acceptance actions
+        document.getElementById('acceptQuote').addEventListener('click', function() {
+            alert(`Thank you for accepting this quotation for ${companyName}! Our team will contact you within 24 hours to finalize the booking details.`);
+            // Here you would typically send this acceptance to your backend
+        });
+
+        // Request Changes Modal Functionality
+        const feedbackModal = document.getElementById('feedbackModal');
+        const feedbackForm = document.getElementById('feedbackForm');
+        const feedbackSuccess = document.getElementById('feedbackSuccess');
+        const feedbackTextarea = document.getElementById('feedbackTextarea');
+        
+        document.getElementById('requestChanges').addEventListener('click', function() {
+            feedbackModal.classList.add('active');
+        });
+
+        // Close modal functionality
+        document.querySelector('.close-feedback').addEventListener('click', function() {
+            feedbackModal.classList.remove('active');
+            resetFeedbackForm();
+        });
+
+        document.querySelector('.btn-cancel-feedback').addEventListener('click', function() {
+            feedbackModal.classList.remove('active');
+            resetFeedbackForm();
+        });
+
+        // Close modal when clicking outside
+        feedbackModal.addEventListener('click', function(e) {
+            if (e.target === feedbackModal) {
+                feedbackModal.classList.remove('active');
+                resetFeedbackForm();
+            }
+        });
+
+        // Form submission with envelope animation
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            const name = document.getElementById('feedbackName').value.trim();
+            const email = document.getElementById('feedbackEmail').value.trim();
+            const phone = document.getElementById('feedbackPhone').value.trim();
+            const message = feedbackTextarea.value.trim();
+            
+            if (!name || !email || !phone || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Phone validation (basic)
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+                alert('Please enter a valid phone number.');
+                return;
+            }
+            
+            // Animate the textarea like an envelope folding
+            feedbackTextarea.style.transition = 'all 0.8s ease';
+            feedbackTextarea.style.transform = 'perspective(500px) rotateX(90deg)';
+            feedbackTextarea.style.opacity = '0';
+            feedbackTextarea.style.height = '0px';
+            
+            // After animation, show success message
+            setTimeout(function() {
+                feedbackForm.style.display = 'none';
+                feedbackSuccess.classList.add('active');
+                
+                // Auto-close modal after 3 seconds
+                setTimeout(function() {
+                    feedbackModal.classList.remove('active');
+                    resetFeedbackForm();
+                }, 3000);
+            }, 800);
+            
+            // Here you would typically send the feedback to your backend
+            console.log('Feedback submitted:', { name, email, phone, message, company: companyName });
+        });
+
+        function resetFeedbackForm() {
+            feedbackForm.reset();
+            feedbackForm.style.display = 'block';
+            feedbackSuccess.classList.remove('active');
+            feedbackTextarea.style.transform = 'none';
+            feedbackTextarea.style.opacity = '1';
+            feedbackTextarea.style.height = 'auto';
+        }
+
+        // Load quote data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadQuoteData();
+        });
+
+        // Print functionality
+        function printQuote() {
+            window.print();
+        }
+
+        // Add print button functionality (optional)
+        const printButton = document.createElement('button');
+        printButton.className = 'btn btn-outline-secondary';
+        printButton.innerHTML = '<i class="fas fa-print"></i> Print Quote';
+        printButton.onclick = printQuote;
+        printButton.style.margin = '0.5rem';
+        
+        document.querySelector('.acceptance-section').appendChild(printButton);
+    </script>
+</body>
+</html>
